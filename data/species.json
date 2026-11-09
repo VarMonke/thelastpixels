@@ -9,8 +9,8 @@
     "population": { "value": 2, "kind": "census", "year": 2024, "source": "Save the Rhino / IUCN SSC AfRSG" },
     "note": "Najin and Fatu — the last two, both female, under armed guard.",
     "donate": [
-      { "name": "Ol Pejeta Conservancy", "url": "https://www.olpejetaconservancy.org/donate/", "note": "houses Najin & Fatu — funds the rangers guarding the actual last two" },
-      { "name": "Save the Rhino International", "url": "https://www.savetherhino.org/get-involved/donate/", "note": "funds ranger teams and rhino recovery across Kenya" }
+      { "name": "Ol Pejeta Conservancy", "url": "https://www.olpejetaconservancy.org/donate/?utm_source=thelastpixels", "note": "houses Najin & Fatu — funds the rangers guarding the actual last two" },
+      { "name": "Save the Rhino International", "url": "https://www.savetherhino.org/get-involved/donate/?utm_source=thelastpixels", "note": "funds ranger teams and rhino recovery across Kenya" }
     ]
   },
   {
@@ -23,8 +23,8 @@
     "population": { "value": 10, "kind": "estimate", "year": 2023, "source": "IUCN SSC / CIRVA acoustic survey" },
     "note": "The world's rarest marine mammal; likely fewer than a dozen remain.",
     "donate": [
-      { "name": "Sea Shepherd", "url": "https://seashepherd.org/vaquita/", "note": "ships patrolling the refuge year-round — donations via this page are designated to the vaquita campaign" },
-      { "name": "Viva Vaquita", "url": "https://vivavaquita.org/donate/", "note": "researcher-led coalition focused entirely on the vaquita" }
+      { "name": "Sea Shepherd", "url": "https://seashepherd.org/vaquita/?utm_source=thelastpixels", "note": "ships patrolling the refuge year-round — donations via this page are designated to the vaquita campaign" },
+      { "name": "Viva Vaquita", "url": "https://vivavaquita.org/donate/?utm_source=thelastpixels", "note": "researcher-led coalition focused entirely on the vaquita" }
     ]
   },
   {
@@ -37,8 +37,8 @@
     "population": { "value": 325, "kind": "census", "year": 2026, "source": "NZ DOC Kākāpō Recovery" },
     "note": "Every individual has a name, a transmitter and a dossier.",
     "donate": [
-      { "name": "NZ DOC Kākāpō Recovery", "url": "https://www.doc.govt.nz/our-work/kakapo-recovery/get-involved/donate/", "note": "the official programme — 100% of donations go to the Mauri Ora Kākāpō Trust" },
-      { "name": "World Parrot Trust", "url": "https://parrots.org/donate/", "note": "supports kākāpō diet, health monitoring and release-planning work" }
+      { "name": "NZ DOC Kākāpō Recovery", "url": "https://www.doc.govt.nz/our-work/kakapo-recovery/get-involved/donate/?utm_source=thelastpixels", "note": "the official programme — 100% of donations go to the Mauri Ora Kākāpō Trust" },
+      { "name": "World Parrot Trust", "url": "https://parrots.org/donate/?utm_source=thelastpixels", "note": "supports kākāpō diet, health monitoring and release-planning work" }
     ]
   },
   {
@@ -51,8 +51,8 @@
     "population": { "value": 120, "kind": "estimate", "year": 2022, "source": "Land of the Leopard NP camera-trap census" },
     "note": "The rarest cat on earth, back from ~30 in the 1990s.",
     "donate": [
-      { "name": "WildCats Conservation Alliance", "url": "https://conservewildcats.org/donate/", "note": "100% of donations to field projects — their partners cover ~93% of remaining wild leopards" },
-      { "name": "Wildlife Conservation Society", "url": "https://secure.wcs.org/donate/save-wildlife", "note": "runs monitoring and protection work across the Russia–China leopard range" }
+      { "name": "WildCats Conservation Alliance", "url": "https://conservewildcats.org/donate/?utm_source=thelastpixels", "note": "100% of donations to field projects — their partners cover ~93% of remaining wild leopards" },
+      { "name": "Wildlife Conservation Society", "url": "https://secure.wcs.org/donate/save-wildlife?utm_source=thelastpixels", "note": "runs monitoring and protection work across the Russia–China leopard range" }
     ]
   },
   {
@@ -65,8 +65,8 @@
     "population": { "value": 1063, "kind": "census", "year": 2018, "source": "IUCN SSC / Gorilla census (Bwindi + Virunga)" },
     "note": "One of conservation's few genuine comebacks — up from ~680 in 2008.",
     "donate": [
-      { "name": "Dian Fossey Gorilla Fund", "url": "https://gorillafund.org/get-involved/", "note": "daily tracker teams in the field since 1967" },
-      { "name": "Gorilla Doctors", "url": "https://gorilladoctors.org/give/", "note": "the veterinary teams that keep individual wild gorillas alive" }
+      { "name": "Dian Fossey Gorilla Fund", "url": "https://gorillafund.org/get-involved/?utm_source=thelastpixels", "note": "daily tracker teams in the field since 1967" },
+      { "name": "Gorilla Doctors", "url": "https://gorilladoctors.org/give/?utm_source=thelastpixels", "note": "the veterinary teams that keep individual wild gorillas alive" }
     ]
   },
   {
@@ -79,8 +79,8 @@
     "population": { "value": 561, "kind": "census", "year": 2023, "source": "USFWS California Condor Recovery (incl. captive)" },
     "note": "Down to 27 in 1987 — every bird alive descends from captive breeding.",
     "donate": [
-      { "name": "Ventana Wildlife Society", "url": "https://www.ventanaws.org/donatetocondorrecovery.html", "note": "releases and tracks the central CA flock; lead-ammo outreach is the #1 preventable killer" },
-      { "name": "Yurok Condor Restoration Program", "url": "https://www.yuroktribe.org/condor-conservation-how-you-can-help", "note": "indigenous-led reintroduction on Yurok ancestral territory" }
+      { "name": "Ventana Wildlife Society", "url": "https://www.ventanaws.org/donatetocondorrecovery.html?utm_source=thelastpixels", "note": "releases and tracks the central CA flock; lead-ammo outreach is the #1 preventable killer" },
+      { "name": "Yurok Condor Restoration Program", "url": "https://www.yuroktribe.org/condor-conservation-how-you-can-help?utm_source=thelastpixels", "note": "indigenous-led reintroduction on Yurok ancestral territory" }
     ]
   },
   {
@@ -93,8 +93,8 @@
     "population": { "value": 4500, "low": 3726, "high": 5578, "kind": "estimate", "year": 2023, "source": "Global Tiger Forum / national censuses" },
     "note": "India holds ~75% of the wild population and counts it per-state.",
     "donate": [
-      { "name": "Panthera", "url": "https://www.panthera.org/support-us", "note": "all wild cats; overhead funded separately so gifts go to the field" },
-      { "name": "WildCats Conservation Alliance", "url": "https://conservewildcats.org/donate/", "note": "tigers and Amur leopards are its only two species; 100% to field projects" }
+      { "name": "Panthera", "url": "https://www.panthera.org/support-us?utm_source=thelastpixels", "note": "all wild cats; overhead funded separately so gifts go to the field" },
+      { "name": "WildCats Conservation Alliance", "url": "https://conservewildcats.org/donate/?utm_source=thelastpixels", "note": "tigers and Amur leopards are its only two species; 100% to field projects" }
     ]
   },
   {
@@ -107,8 +107,8 @@
     "population": { "value": 415428, "low": 395317, "high": 435539, "kind": "estimate", "year": 2016, "source": "African Elephant Status Report / AfESG" },
     "note": "The best-monitored big animal on earth — the AED tracks it per survey zone.",
     "donate": [
-      { "name": "Save the Elephants", "url": "https://give.wildnet.org/campaign/805194/donate", "note": "WCN partner — 100% of your gift reaches STE in Kenya" },
-      { "name": "Sheldrick Wildlife Trust", "url": "https://www.sheldrickwildlifetrust.org/orphans", "note": "the orphan-rescue specialists — foster a calf, watch it rewild" }
+      { "name": "Save the Elephants", "url": "https://give.wildnet.org/campaign/805194/donate?utm_source=thelastpixels", "note": "WCN partner — 100% of your gift reaches STE in Kenya" },
+      { "name": "Sheldrick Wildlife Trust", "url": "https://www.sheldrickwildlifetrust.org/orphans?utm_source=thelastpixels", "note": "the orphan-rescue specialists — foster a calf, watch it rewild" }
     ]
   },
   {
@@ -121,8 +121,8 @@
     "population": { "value": 1923000, "kind": "estimate", "year": 2023, "source": "Kazakhstan aerial survey / IUCN" },
     "note": "48,000 in 2005 → ~1.9M now. Proof the pixels can come back.",
     "donate": [
-      { "name": "Saiga Conservation Alliance", "url": "https://saiga-conservation.org/support/donate", "note": "the dedicated saiga org — UK charity; US donors route via WCN for tax deduction" },
-      { "name": "Altyn Dala Conservation Initiative", "url": "https://altyndala.org/get-involved/", "note": "the steppe restoration itself — Earthshot Prize winner, saiga as flagship" }
+      { "name": "Saiga Conservation Alliance", "url": "https://saiga-conservation.org/support/donate?utm_source=thelastpixels", "note": "the dedicated saiga org — UK charity; US donors route via WCN for tax deduction" },
+      { "name": "Altyn Dala Conservation Initiative", "url": "https://altyndala.org/get-involved/?utm_source=thelastpixels", "note": "the steppe restoration itself — Earthshot Prize winner, saiga as flagship" }
     ]
   }
 ]
