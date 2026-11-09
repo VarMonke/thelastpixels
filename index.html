@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>The Last Pixels</title>
+    <style>
+      :root {
+        --bg: #14100a;
+        --parchment: #e3d5ab;
+        --ember: #e08a35;
+      }
+
+      html {
+        background: #0d0905;
+      }
+
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+      }
+
+      body {
+        display: flex;
+        flex-direction: column;
+        font-family: "Iowan Old Style", Palatino, "EB Garamond", Georgia, serif;
+        color: var(--parchment);
+        background: radial-gradient(115% 100% at 50% 38%, #1d160c, #0d0905 72%)
+          fixed;
+      }
+
+      /* a film of age over everything */
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 5;
+        pointer-events: none;
+        opacity: 0.05;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+      }
+
+      header {
+        text-align: center;
+        padding: 16px 0 2px;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 30px;
+        font-weight: 500;
+        letter-spacing: 0.01em;
+      }
+
+      .sub {
+        margin-top: 2px;
+        font-size: 14px;
+        font-style: italic;
+        opacity: 0.55;
+      }
+
+      #map {
+        position: relative;
+        flex: 1;
+        min-height: 0;
+      }
+
+      canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
+        /* every dot carries a faint halo — lights, not ink */
+        filter: drop-shadow(0 0 2px rgba(227, 213, 171, 0.25));
+      }
+
+      #tip {
+        position: absolute;
+        pointer-events: none;
+        padding: 2px 9px;
+        font-size: 16px;
+        font-style: italic;
+        color: var(--parchment);
+        background: rgba(13, 9, 5, 0.9);
+        border: 1px solid rgba(227, 213, 171, 0.22);
+        border-radius: 2px;
+        white-space: nowrap;
+        opacity: 0;
+        transition: opacity 0.12s;
+        transform: translate(-50%, -160%);
+      }
+
+      footer {
+        padding: 4px 0 10px;
+        text-align: center;
+        font-size: 12px;
+        font-style: italic;
+        opacity: 0.5;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>The Last Pixels</h1>
+      <div class="sub">one pixel. one animal.</div>
+    </header>
+    <div id="map">
+      <canvas id="c"></canvas>
+      <div id="tip"></div>
+    </div>
+    <footer id="foot">loading…</footer>
+    <script>
+      // quiet link to the first species page, under the footer stats
+      addEventListener("load", () => {
+        const a = document.createElement("a");
+        a.href = "animal.html";
+        a.textContent = "meet the last of them →";
+        a.style.cssText =
+          "display:block;margin-top:2px;color:inherit;text-decoration:none";
+        document.getElementById("foot").appendChild(a);
+      });
+    </script>
+    <script type="module" src="map.js"></script>
+  </body>
+</html>
