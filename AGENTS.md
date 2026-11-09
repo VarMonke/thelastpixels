@@ -108,7 +108,8 @@ detail, annoying license — prefer Natural Earth or geoBoundaries (CC-BY).
 - NC licenses (CC-BY-NC, CC BY-NC-SA, LPI agreement) are written for exactly
   this: non-commercial conservation/education.
 - Repo hygiene: code MIT; every data file marked with source + license; a
-  `SOURCES.md` and per-record `source`/`year`/`license` fields in the JSON.
+  `SOURCES.md` (the live licensing model — code MIT, our compilation CC-BY
+  4.0, per-record `source`/`year` in the JSON, facts cite-only).
 - Prefer citing the *primary* census paper where one exists — cleaner and
   more precise than citing IUCN citing it.
 - Avoid doom-only framing: show recoveries too (saiga 48k→1.9M, condor
