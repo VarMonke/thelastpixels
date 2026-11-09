@@ -26,16 +26,21 @@ animal.html / animal.js        species page: ?a=<slug>, one pixel per animal
 map.js                         vanilla JS, no deps — the whole renderer
 map.v1.js                      snapshot: flat-map version (pre lens/borders)
 tools/build_grid.py            Natural Earth -> data/grid.json, stdlib only
+tools/validate_data.py         schema + invariant checks on all data files;
+                               run before touching data (gate for data PRs)
 data/grid.json                 baked dot grid (currently 800x481 winkel tripel)
-data/grid-440.json             older 440-col Equal Earth grid (for map.v1.js)
+data/grid-440.json             older 440-col Equal Earth grid (for map.v1.js;
+                               frozen snapshot — has the pre-fix stamp bug)
 data/species.json              curated species records (9 so far), each with
                                population{value,low,high,kind,year,source}
+                               and donate[] (verified NGO links, 2 per species)
 data/ne_50m_...geojson         Natural Earth countries, public domain
 RESEARCH.md                    NGO donation targets + "good parks" vetting
 DIRECTION.md                   product vision: who it's for, how it lands
 ```
 
 Run: `python3 tools/build_grid.py` then `python3 -m http.server <port>`.
+Check data after any change: `python3 tools/validate_data.py`.
 Watch out — this machine runs games/models on half the low ports; check
 `lsof -i :<port>` first.
 
@@ -43,8 +48,9 @@ Watch out — this machine runs games/models on half the low ports; check
 
 - **Projection**: Winkel tripel (chosen for the familiar silhouette over Equal
   Earth). Swap = replace `project()` in build_grid.py; nothing else cares.
-- **Density knob**: `COLS` in build_grid.py. 800 ≈ 302k dots, crisp ~1.5px
-  dots. 2000 was tried — sub-pixel dots, 1.5M cells, laptops cry. Stay <1200.
+- **Density knob**: `COLS` in build_grid.py. 800 ≈ 101k dots (302k flat
+  entries — `cells` is [x,y,ci] triples), crisp ~1.5px dots. 2000 was tried —
+  sub-pixel dots, 1.5M cells, laptops cry. Stay <1200.
 - **Rendering**: offscreen "base" canvas holds resting dots; per-frame = blit
   + batched Path2D overlays (lens, hover). Never per-dot draws at this count.
 - **Lens**: `lift = min(1, LENS/dist)^2` per cell, decay visible, dies at
@@ -54,7 +60,9 @@ Watch out — this machine runs games/models on half the low ports; check
   vertex) — single lines, diagonal cuts, no doubles. Land/sea edges included
   so coastlines etch in. Exactly 1 device px, snapped.
 - **Every country gets ≥1 pixel** — sub-cell states (Vatican, Monaco…) are
-  stamped at their centroid in the bake.
+  stamped at their centroid in the bake. Stamps may take a filled cell but
+  never another stamp's (Saint Martin/Sint Maarten share an island — the
+  earlier bake ate one whole country's pixel this way).
 
 ## Data source research (2026-11)
 
@@ -81,7 +89,7 @@ Australian state), pandas (per province), plus single-region species
 (Florida panther, Galápagos).
 
 **Census-tier species** (1px=1 animal literally true): N. white rhino 2 ·
-vaquita ~10 · kakapo ~247 · Javan rhino ~50 · Amur leopard ~120 · mountain
+vaquita ~10 · kakapo ~325 · Javan rhino ~50 · Amur leopard ~120 · mountain
 gorilla ~1,063 · CA condor ~560 · whooping crane ~550. Sources: IUCN
 specialist-group reports, national censuses, recovery programs — cite each.
 
