@@ -23,6 +23,7 @@ everything to static JSON, so a backend is mostly optional.
 index.html                     the map page (dark parchment vignette, serif —
                                dots are the only light; accent is ember #e08a35)
 animal.html / animal.js        species page: ?a=<slug>, one pixel per animal
+species.html / species.js      index of all species, fewest left first
 map.js                         vanilla JS, no deps — the whole renderer
 map.v1.js                      snapshot: flat-map version (pre lens/borders)
 tools/build_grid.py            Natural Earth -> data/grid.json, stdlib only
@@ -31,12 +32,13 @@ tools/validate_data.py         schema + invariant checks on all data files;
 data/grid.json                 baked dot grid (currently 800x481 winkel tripel)
 data/grid-440.json             older 440-col Equal Earth grid (for map.v1.js;
                                frozen snapshot — has the pre-fix stamp bug)
-data/species.json              curated species records (9 so far), each with
+data/species.json              curated species records (12 so far), each with
                                population{value,low,high,kind,year,source}
                                and donate[] (verified NGO links, 2 per species)
 data/ne_50m_...geojson         Natural Earth countries, public domain
 RESEARCH.md                    NGO donation targets + "good parks" vetting
 DIRECTION.md                   product vision: who it's for, how it lands
+CONTRIBUTING.md                adopt-a-species rules: sourcing, donate criteria
 ```
 
 Run: `python3 tools/build_grid.py` then `python3 -m http.server <port>`.
@@ -131,6 +133,12 @@ detail, annoying license — prefer Natural Earth or geoBoundaries (CC-BY).
   length = abundance — that's the design).
 - Last row centered so small counts sit symmetric; last pixel drawn accent.
 - Pour-in animation by row-chunks; count-up number in sync.
+- n=0 (EX species): skips the pour, draws a faint empty frame — "the frame
+  stays; the light doesn't". Western black rhino is the test case.
+- `donate[]` renders in the card as "who stands between them and zero" —
+  before the field so a 5k-px scroll can't hide the payload.
+- Year badge goes dashed-ember when the estimate is >5y old (skipped for EX —
+  a zero can't go stale). Elephant 2016 + gorilla 2018 currently flag.
 - >~10M animals will break single-canvas height — needs virtualization or
   a "1 px = K" scale badge eventually.
 
