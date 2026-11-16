@@ -48,8 +48,14 @@ st.style.color = ["VU", "NT", "LC", "DD"].includes(s.status)
   ? "var(--bg)"
   : "var(--parchment)";
 mk(s.population.kind);
-mk(`~${s.population.year}`);
+const yb = mk(`~${s.population.year}`);
 if (s.trend) mk(s.trend);
+// an estimate older than ~5y is a guess wearing a date — flag it.
+// (not for EX: a zero can't go stale)
+if (s.population.year < new Date().getFullYear() - 5 && s.status !== "EX") {
+  yb.classList.add("stale");
+  yb.title = `estimate from ${s.population.year} — more than five years old`;
+}
 
 const rangeEl = document.getElementById("range");
 rangeEl.textContent = s.population.low
@@ -58,15 +64,45 @@ rangeEl.textContent = s.population.low
 
 const caption = document.getElementById("caption");
 caption.textContent =
-  n <= 2 ? "every one of them, below" : `${n.toLocaleString()} individuals, below`;
+  n === 0
+    ? "none left to count — the frame below stays empty"
+    : n <= 2
+      ? "every one of them, below"
+      : `${n.toLocaleString()} individuals, below`;
 
 document.getElementById("note").textContent = s.note || "";
 document.getElementById("regions").textContent = s.regions?.length
-  ? "found in: " + s.regions.join(" · ")
+  ? (s.status === "EX" ? "formerly: " : "found in: ") + s.regions.join(" · ")
   : "";
+
+// the payload: who is actually standing between this species and zero
+const protect = document.getElementById("protect");
+if (s.donate?.length) {
+  const ph = document.createElement("div");
+  ph.className = "ph";
+  ph.textContent = "who stands between them and zero";
+  protect.appendChild(ph);
+  for (const d of s.donate) {
+    const a = document.createElement("a");
+    a.href = d.url;
+    a.target = "_blank";
+    a.rel = "noopener";
+    const org = document.createElement("div");
+    org.className = "org";
+    org.textContent = d.name;
+    const why = document.createElement("div");
+    why.className = "why";
+    why.textContent = d.note || "";
+    a.append(org, why);
+    protect.appendChild(a);
+  }
+}
+
 document.getElementById("foot").textContent =
-  `each pixel is one living individual · ${s.population.source} · ` +
-  `~${s.population.year}`;
+  (n === 0
+    ? "no pixels left to draw"
+    : "each pixel is one living individual") +
+  ` · ${s.population.source} · ~${s.population.year}`;
 
 // --- the field ---------------------------------------------------------------
 // pitch adapts to the count: few animals = giant pixels you can't miss,
@@ -107,11 +143,28 @@ const dx = (i) => {
 };
 const dy = (i) => Math.floor(i / cols) * pitch + inset;
 
-layout();
-chunk = 0;
+// extinct: nothing pours, nothing flickers. the frame stays; the light doesn't.
+function drawEmpty() {
+  const w = Math.min(innerWidth - 32, 640);
+  canvas.width = w;
+  canvas.height = 140;
+  canvas.style.width = w + "px";
+  canvas.style.height = "140px";
+  ctx.strokeStyle = "rgba(227, 213, 171, 0.18)";
+  ctx.strokeRect(0.5, 0.5, w - 1, 139);
+}
 
 // big number counts up in step with the pour
 const countEl = document.getElementById("count");
+
+if (n === 0) {
+  drawEmpty();
+  countEl.textContent = "0";
+} else {
+  layout();
+  chunk = 0;
+}
+
 const t0 = performance.now();
 const DURATION = Math.min(2500, 400 + Math.sqrt(n) * 30); // 2 dots = ~0.4s, flood = ~2.5s
 
@@ -145,9 +198,10 @@ function frame(now) {
   }
   requestAnimationFrame(frame);
 }
-requestAnimationFrame(frame);
+if (n > 0) requestAnimationFrame(frame);
 
 addEventListener("resize", () => {
+  if (n === 0) return drawEmpty();
   layout();
   // just redraw everything on resize; pours are cheap
   const p = new Path2D();

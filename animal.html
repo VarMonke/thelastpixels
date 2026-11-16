@@ -53,6 +53,10 @@
         opacity: 1;
       }
 
+      header nav {
+        float: right;
+      }
+
       #card {
         max-width: 760px;
         margin: 0 auto;
@@ -97,6 +101,12 @@
         box-shadow: 0 0 0 1px rgba(227, 213, 171, 0.15);
       }
 
+      .badge.stale {
+        border-style: dashed;
+        color: var(--ember);
+        opacity: 1;
+      }
+
       .count {
         margin: 34px 0 6px;
         font-size: 88px;
@@ -128,6 +138,50 @@
         margin-top: 14px;
         font-size: 13px;
         opacity: 0.5;
+      }
+
+      .protect {
+        margin-top: 34px;
+      }
+
+      .protect .ph {
+        font-size: 14px;
+        font-style: italic;
+        opacity: 0.55;
+        margin-bottom: 12px;
+      }
+
+      .protect a {
+        display: block;
+        max-width: 52ch;
+        margin: 10px auto 0;
+        padding: 10px 16px;
+        text-align: left;
+        color: var(--parchment);
+        text-decoration: none;
+        border: 1px solid rgba(227, 213, 171, 0.22);
+        border-radius: 2px;
+        transition: border-color 0.15s;
+      }
+
+      .protect a:hover {
+        border-color: var(--ember);
+      }
+
+      .protect .org {
+        font-size: 15px;
+      }
+
+      .protect .org::after {
+        content: " ↗";
+        opacity: 0.5;
+      }
+
+      .protect .why {
+        margin-top: 3px;
+        font-size: 13px;
+        font-style: italic;
+        opacity: 0.6;
       }
 
       #fieldwrap {
@@ -172,7 +226,10 @@
     </style>
   </head>
   <body>
-    <header><a href="index.html">← the last pixels</a></header>
+    <header>
+      <a href="index.html">← the last pixels</a>
+      <nav><a href="species.html">all species →</a></nav>
+    </header>
     <main id="card">
       <h1 id="name"></h1>
       <div class="scientific" id="scientific"></div>
@@ -182,6 +239,7 @@
       <div class="caption" id="caption"></div>
       <div class="note" id="note"></div>
       <div class="regions" id="regions"></div>
+      <div class="protect" id="protect"></div>
     </main>
     <div id="fieldwrap">
       <canvas id="field"></canvas>
