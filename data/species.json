@@ -14,6 +14,20 @@
     ]
   },
   {
+    "slug": "western-black-rhino",
+    "name": "Western black rhinoceros",
+    "scientific": "Diceros bicornis longipes",
+    "status": "EX",
+    "trend": "extinct",
+    "regions": ["Cameroon"],
+    "population": { "value": 0, "kind": "census", "year": 2011, "source": "IUCN Red List (Emslie 2011)" },
+    "note": "Declared extinct in 2011 — no confirmed sighting since 2006, none ever in captivity. What a zero looks like.",
+    "donate": [
+      { "name": "Save the Rhino International", "url": "https://www.savetherhino.org/get-involved/donate/?utm_source=thelastpixels", "note": "too late for this one — for the ~6,800 black rhinos still here" },
+      { "name": "International Rhino Foundation", "url": "https://rhinos.org/donate/?utm_source=thelastpixels", "note": "funds ranger protection for the remaining African and Asian rhinos" }
+    ]
+  },
+  {
     "slug": "vaquita",
     "name": "Vaquita",
     "scientific": "Phocoena sinus",
@@ -56,6 +70,20 @@
     ]
   },
   {
+    "slug": "javan-rhino",
+    "name": "Javan rhinoceros",
+    "scientific": "Rhinoceros sondaicus",
+    "status": "CR",
+    "trend": "uncertain",
+    "regions": ["Ujung Kulon NP, Java, Indonesia — the entire species on one peninsula"],
+    "population": { "value": 76, "low": 50, "high": 82, "kind": "estimate", "year": 2024, "source": "KLHK camera-trap census; disputed by Auriga Nusantara poaching report" },
+    "note": "Official count is ~82 — but arrests in 2024 over 26 poached rhinos suggest the real number may be far lower. We show the range, not the press release.",
+    "donate": [
+      { "name": "International Rhino Foundation", "url": "https://rhinos.org/donate/?utm_source=thelastpixels", "note": "funds the Rhino Protection Units patrolling Ujung Kulon 15+ days a month, year-round" },
+      { "name": "Save the Rhino International", "url": "https://www.savetherhino.org/get-involved/donate/?utm_source=thelastpixels", "note": "co-funds Javan and Sumatran rhino protection programmes" }
+    ]
+  },
+  {
     "slug": "mountain-gorilla",
     "name": "Mountain gorilla",
     "scientific": "Gorilla beringei beringei",
@@ -81,6 +109,20 @@
     "donate": [
       { "name": "Ventana Wildlife Society", "url": "https://www.ventanaws.org/donatetocondorrecovery.html?utm_source=thelastpixels", "note": "releases and tracks the central CA flock; lead-ammo outreach is the #1 preventable killer" },
       { "name": "Yurok Condor Restoration Program", "url": "https://www.yuroktribe.org/condor-conservation-how-you-can-help?utm_source=thelastpixels", "note": "indigenous-led reintroduction on Yurok ancestral territory" }
+    ]
+  },
+  {
+    "slug": "whooping-crane",
+    "name": "Whooping crane",
+    "scientific": "Grus americana",
+    "status": "EN",
+    "trend": "increasing",
+    "regions": ["Wood Buffalo NP, Canada · Aransas NWR, Texas · Louisiana"],
+    "population": { "value": 834, "kind": "estimate", "year": 2025, "source": "International Crane Foundation / USFWS (wild + captive)" },
+    "note": "16 birds in 1941. ~700 wild now — the rest are the breeding stock that keeps them coming back.",
+    "donate": [
+      { "name": "International Crane Foundation", "url": "https://savingcranes.org/donate/?utm_source=thelastpixels", "note": "the crane org — runs the captive-breeding programme the recovery stands on" },
+      { "name": "Friends of the Wild Whoopers", "url": "https://friendsofthewildwhoopers.org/support-fotww/?utm_source=thelastpixels", "note": "small 501(c)(3) securing stopover habitat along the migration corridor" }
     ]
   },
   {
