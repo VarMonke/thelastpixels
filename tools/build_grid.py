@@ -20,7 +20,7 @@ ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "data" / "ne_50m_admin_0_countries.geojson"
 OUT = ROOT / "data" / "grid.json"
 
-COLS = 800  # grid width in cells; height follows from the projection's aspect
+COLS = 500  # grid width in cells; height follows from the projection's aspect
 
 
 # --- Winkel tripel projection: the mean of equirectangular and Aitoff --------
@@ -108,10 +108,15 @@ def main():
     # Any country that fell between the cracks (Singapore, Vatican, small
     # islands) still gets a pixel, stamped at its centroid. Stamps may take a
     # filled cell (the dot belongs at the country's position — the filled
-    # country has thousands of others), but never another stamp's cell: two
-    # micro-states can share an island (Saint Martin/Sint Maarten) and the
-    # later stamp must move aside rather than erase the first.
+    # country has thousands of others), but never another stamp's cell (two
+    # micro-states can share an island — Saint Martin/Sint Maarten) and never
+    # a filled cell that is its owner's LAST pixel (Northern Cyprus's stamp
+    # once erased Cyprus's only cell this way).
     present = set(grid)
+    count = [0] * len(countries)
+    for v in grid:
+        if v >= 0:
+            count[v] += 1
     taken = set()  # cells claimed by stamps
     stamped = []
     for ci, (cx, cy) in centroids.items():
@@ -127,12 +132,18 @@ def main():
             ]
             free = [
                 (cc, ry) for cc, ry in ring
-                if 0 <= cc < COLS and 0 <= ry < rows and ry * COLS + cc not in taken
+                if 0 <= cc < COLS
+                and 0 <= ry < rows
+                and ry * COLS + cc not in taken
+                and (grid[ry * COLS + cc] < 0 or count[grid[ry * COLS + cc]] > 1)
             ]
             if free:
                 c, r = free[0]
                 break
         if 0 <= c < COLS and 0 <= r < rows:
+            old = grid[r * COLS + c]
+            if old >= 0:
+                count[old] -= 1
             grid[r * COLS + c] = ci
             taken.add(r * COLS + c)
             stamped.append(countries[ci]["name"])

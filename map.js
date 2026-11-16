@@ -21,7 +21,7 @@ const LENS = 10; // cells under the cursor that get the full lift
 const CUTOFF = 55; // beyond this many cells, the pull is exactly zero
 const LIFT = 2.2; // max size boost at the centre of the lens
 const PULL = 0.55; // how far dots slide toward the cursor, as a fraction of a cell
-const MAX_BLEED = 1.25; // cover the screen, but never crop more than this past fit
+const MAX_BLEED = 1.0; // fit the whole map — cropping countries off the page is off-brand
 
 const canvas = document.getElementById("c");
 const ctx = canvas.getContext("2d");

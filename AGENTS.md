@@ -29,7 +29,7 @@ map.v1.js                      snapshot: flat-map version (pre lens/borders)
 tools/build_grid.py            Natural Earth -> data/grid.json, stdlib only
 tools/validate_data.py         schema + invariant checks on all data files;
                                run before touching data (gate for data PRs)
-data/grid.json                 baked dot grid (currently 800x481 winkel tripel)
+data/grid.json                 baked dot grid (currently 500x301 winkel tripel)
 data/grid-440.json             older 440-col Equal Earth grid (for map.v1.js;
                                frozen snapshot — has the pre-fix stamp bug)
 data/species.json              curated species records (12 so far), each with
@@ -50,9 +50,12 @@ Watch out — this machine runs games/models on half the low ports; check
 
 - **Projection**: Winkel tripel (chosen for the familiar silhouette over Equal
   Earth). Swap = replace `project()` in build_grid.py; nothing else cares.
-- **Density knob**: `COLS` in build_grid.py. 800 ≈ 101k dots (302k flat
-  entries — `cells` is [x,y,ci] triples), crisp ~1.5px dots. 2000 was tried —
-  sub-pixel dots, 1.5M cells, laptops cry. Stay <1200.
+- **Density knob**: `COLS` in build_grid.py. 500 ≈ 39k dots (118k flat
+  entries — `cells` is [x,y,ci] triples), ~2.3px dots — readable as *pixels*,
+  not texture. 800 (101k dots, ~1.5px) read as smudge; 2000 was tried —
+  sub-pixel dots, 1.5M cells, laptops cry.
+- **Map fit**: `MAX_BLEED` in map.js. 1.0 = fit whole map, letterboxed by the
+  vignette. Cover-cropping cuts countries off the page — off-brand.
 - **Rendering**: offscreen "base" canvas holds resting dots; per-frame = blit
   + batched Path2D overlays (lens, hover). Never per-dot draws at this count.
 - **Lens**: `lift = min(1, LENS/dist)^2` per cell, decay visible, dies at
@@ -63,8 +66,10 @@ Watch out — this machine runs games/models on half the low ports; check
   so coastlines etch in. Exactly 1 device px, snapped.
 - **Every country gets ≥1 pixel** — sub-cell states (Vatican, Monaco…) are
   stamped at their centroid in the bake. Stamps may take a filled cell but
-  never another stamp's (Saint Martin/Sint Maarten share an island — the
-  earlier bake ate one whole country's pixel this way).
+  never another stamp's (Saint Martin/Sint Maarten share an island — an
+  earlier bake ate one whole country's pixel this way) and never a country's
+  LAST filled cell (Northern Cyprus's stamp once erased Cyprus's only pixel).
+  validate_data.py fails the bake if any country ends up pixel-less.
 
 ## Data source research (2026-11)
 
