@@ -114,7 +114,7 @@ The world map isn't decoration — it's the **regional honesty** layer:
 - **A stale number is a lie.** Every record needs `year` front and center
   and the UI should age-flag old estimates (>5y) rather than silently rot.
 - **One-pixel-per-animal breaks >~10M.** Scale badges ("1 px = 1,000") or
-  virtualization needed eventually — flagged in animal.js already.
+  virtualization needed eventually — noted for the rebuild.
 - **Certifier ≠ gospel.** Green List is voluntary (bad parks don't apply);
   African Parks has real indigenous-rights criticisms. Present signals,
   let readers judge — that epistemic honesty is the brand anyway.
@@ -126,8 +126,8 @@ The world map isn't decoration — it's the **regional honesty** layer:
 
 The genuinely impressive thing here isn't the tech — it's the *story arc*:
 "built an open-source conservation visualization where community members
-contribute cited population data via PR; renders up to 300k interactive
-points in vanilla canvas; links 100% of donate buttons to vetted NGOs."
+contribute cited population data via PR; renders hundreds of thousands of
+individual pixels; links 100% of donate buttons to vetted NGOs."
 That's a portfolio piece with: a real domain, real data engineering, a real
 open-source model, and a demo people remember. The 2-pixel rhino page is
 the interview anecdote — "I made the last two northern white rhinos into

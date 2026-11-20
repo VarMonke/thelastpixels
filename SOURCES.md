@@ -2,7 +2,7 @@
 
 Two layers, kept deliberately separate:
 
-- **Code** (index.html, animal.*, map.js, tools/): **MIT** — see LICENSE.
+- **Code**: **MIT** — see LICENSE.
 - **Data** (data/*.json, this project's curation): **CC-BY 4.0** for our
   compilation — the selection, arrangement, notes and record structure are
   ours. The population figures inside are *facts*, and facts aren't

@@ -4,15 +4,6 @@ The site is a dataset with a renderer on top. `data/species.json` is the whole
 product: one record per species, every number cited. Pick a species you care
 about and send a PR. We review the *source*, not the prose.
 
-Before anything else:
-
-```
-python3 tools/validate_data.py
-```
-
-A PR that fails this gate doesn't get reviewed. It takes ~1s and needs nothing
-but Python 3.
-
 ## What a record looks like
 
 ```json
@@ -108,8 +99,3 @@ existing params) so NGOs can see where their visitors came from.
   note yourself. Don't mirror anyone's database. See `SOURCES.md` for the
   licensing model.
 
-## Code changes
-
-Vanilla JS, no dependencies, no build step. Keep it readable enough to port to
-TypeScript later — the owner is coming from Python/C++/Rust, not frontend.
-Test changes with `python3 -m http.server` and open the page.
