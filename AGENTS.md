@@ -12,65 +12,6 @@ A northern white rhino is 2 pixels. A vaquita is ~10. That's the whole point.
 - **Honest numbers**: always show approx/year/provenance, and distinguish
   census (counted) vs estimate vs modeled.
 
-Owner is learning frontend (Python/Java/C++/Rust background, no JS/TS yet) —
-keep code readable, dependency-free, and well-structured enough to port to TS
-later. A small axum/tokio backend may come; the current design bakes
-everything to static JSON, so a backend is mostly optional.
-
-## Layout
-
-```
-index.html                     the map page (dark parchment vignette, serif —
-                               dots are the only light; accent is ember #e08a35)
-animal.html / animal.js        species page: ?a=<slug>, one pixel per animal
-species.html / species.js      index of all species, fewest left first
-map.js                         vanilla JS, no deps — the whole renderer
-map.v1.js                      snapshot: flat-map version (pre lens/borders)
-tools/build_grid.py            Natural Earth -> data/grid.json, stdlib only
-tools/validate_data.py         schema + invariant checks on all data files;
-                               run before touching data (gate for data PRs)
-data/grid.json                 baked dot grid (currently 500x301 winkel tripel)
-data/grid-440.json             older 440-col Equal Earth grid (for map.v1.js;
-                               frozen snapshot — has the pre-fix stamp bug)
-data/species.json              curated species records (12 so far), each with
-                               population{value,low,high,kind,year,source}
-                               and donate[] (verified NGO links, 2 per species)
-data/ne_50m_...geojson         Natural Earth countries, public domain
-RESEARCH.md                    NGO donation targets + "good parks" vetting
-DIRECTION.md                   product vision: who it's for, how it lands
-CONTRIBUTING.md                adopt-a-species rules: sourcing, donate criteria
-```
-
-Run: `python3 tools/build_grid.py` then `python3 -m http.server <port>`.
-Check data after any change: `python3 tools/validate_data.py`.
-Watch out — this machine runs games/models on half the low ports; check
-`lsof -i :<port>` first.
-
-## Map internals
-
-- **Projection**: Winkel tripel (chosen for the familiar silhouette over Equal
-  Earth). Swap = replace `project()` in build_grid.py; nothing else cares.
-- **Density knob**: `COLS` in build_grid.py. 500 ≈ 39k dots (118k flat
-  entries — `cells` is [x,y,ci] triples), ~2.3px dots — readable as *pixels*,
-  not texture. 800 (101k dots, ~1.5px) read as smudge; 2000 was tried —
-  sub-pixel dots, 1.5M cells, laptops cry.
-- **Map fit**: `MAX_BLEED` in map.js. 1.0 = fit whole map, letterboxed by the
-  vignette. Cover-cropping cuts countries off the page — off-brand.
-- **Rendering**: offscreen "base" canvas holds resting dots; per-frame = blit
-  + batched Path2D overlays (lens, hover). Never per-dot draws at this count.
-- **Lens**: `lift = min(1, LENS/dist)^2` per cell, decay visible, dies at
-  CUTOFF. Dots pull toward cursor (`PULL`). Lifted dots cover resting ones —
-  no erase pass.
-- **Borders**: marching-squares over the cell grid (edge midpoints at each
-  vertex) — single lines, diagonal cuts, no doubles. Land/sea edges included
-  so coastlines etch in. Exactly 1 device px, snapped.
-- **Every country gets ≥1 pixel** — sub-cell states (Vatican, Monaco…) are
-  stamped at their centroid in the bake. Stamps may take a filled cell but
-  never another stamp's (Saint Martin/Sint Maarten share an island — an
-  earlier bake ate one whole country's pixel this way) and never a country's
-  LAST filled cell (Northern Cyprus's stamp once erased Cyprus's only pixel).
-  validate_data.py fails the bake if any country ends up pixel-less.
-
 ## Data source research (2026-11)
 
 Population by *region* is the hard part — published for maybe a few hundred
@@ -121,31 +62,6 @@ detail, annoying license — prefer Natural Earth or geoBoundaries (CC-BY).
   more precise than citing IUCN citing it.
 - Avoid doom-only framing: show recoveries too (saiga 48k→1.9M, condor
   27→560). "Pixels coming back" is the donation pitch — it works, here's who.
-
-## Pixel rendering notes (for the species pages later)
-
-- < ~25k animals: literal 1px=1animal grid — most threatened species live here
-- > 1M: zoom metaphor ("each dot = 1,000") or "needs N screens of pixels"
-- extinct: empty frame, counter at 0
-- LPI time series → watch the pixel mass shrink 1970→now
-- sub-country divisions: NE admin_1 exists for the map side; species data per
-  subdivision is sparse (see verified list) — verified vs modeled, labeled
-
-## Species page internals (animal.js)
-
-- Adaptive pitch: `pitch = sqrt(boxW*boxH / n)` clamped to 4-220px. 2 animals
-  = giant visible squares; 415k = 4px dots and the page scrolls (scroll
-  length = abundance — that's the design).
-- Last row centered so small counts sit symmetric; last pixel drawn accent.
-- Pour-in animation by row-chunks; count-up number in sync.
-- n=0 (EX species): skips the pour, draws a faint empty frame — "the frame
-  stays; the light doesn't". Western black rhino is the test case.
-- `donate[]` renders in the card as "who stands between them and zero" —
-  before the field so a 5k-px scroll can't hide the payload.
-- Year badge goes dashed-ember when the estimate is >5y old (skipped for EX —
-  a zero can't go stale). Elephant 2016 + gorilla 2018 currently flag.
-- >~10M animals will break single-canvas height — needs virtualization or
-  a "1 px = K" scale badge eventually.
 
 ## NGOs & "good parks" (see RESEARCH.md for the full directory)
 
